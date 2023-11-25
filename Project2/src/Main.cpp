@@ -1,48 +1,49 @@
-#include <iostream>
-#include <fstream>
-
 #include "Main.h"
 
 int main()
 {
-	glfwInit();
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+	if(m_API == IntermediateCG::RendererAPI::API::OpenGL)
+		std::cout << "[+] Rendering API -> OpenGL" << std::endl;
+	
+	m_RendererCommand->Init();
 
-	GLFWwindow* window = glfwCreateWindow(1080, 720, "CMake Trial", NULL, NULL);
-	if (!window)
-	{
-		std::cout << "Failed to create window!" << std::endl;
-		glfwTerminate();
-		return -1;
-	}
-	glfwMakeContextCurrent(window);
+	std::string title = "Project 2";
 
-	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-	{
-		std::cout << "Failed to Initialize Glad!" << std::endl;
-		glfwTerminate();
-		return -1;
-	}
+	m_RendererCommand->CreateWindow(1080, 720, title.c_str()); 
+
+	m_RendererCommand->GladInit();
 
 	std::ifstream is;
+	std::string line;
+	int cnt = 0;
+
 	is.open("assets/meshes/teapot.obj");
 	if (!is)
 		std::cout << "[-] Failed to open file!" << std::endl;
 	else
 		std::cout << "[+] FILE OPENED SUCCESSFULLY!" << std::endl;
-	is.close();
 
-	while (!glfwWindowShouldClose(window))
+	while(std::getline(is, line))
 	{
-		glClearColor(0.2f, 0.6f, 0.8f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
-
-		glfwSwapBuffers(window);
-		glfwPollEvents();
+		cnt++;
+		if(line[0] == 'v' && line[1] == ' ')
+		{
+			std::cout << "v found at line " << cnt << std::endl;
+		}
 	}
 
-	glfwTerminate();
+	is.close();
+
+	while (m_RendererCommand->GetWindowShouldClose())
+	{
+		m_RendererCommand->SetClearColor(0.2f, 0.6f, 0.8f, 1.0f);
+		m_RendererCommand->Clear();
+
+		m_RendererCommand->SwapBuffer();
+		m_RendererCommand->PollEvents();
+	}
+
+	m_RendererCommand->Terminate();
+	delete m_RendererCommand;
 	return 0;
 }
