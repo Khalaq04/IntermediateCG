@@ -18,32 +18,7 @@ int main()
 	m_RendererCommand->CreateWindow(1080, 720, title.c_str()); 
 
 	m_RendererCommand->GladInit();
-
-	// Loading mesh--------------------------------------------------------------------------------------------------
-	std::ifstream is;
-	std::string line;
-	std::vector<Vertex> vertices;
-
-	is.open("assets/meshes/teapot.obj");
-	if (!is)
-		std::cout << "[-] Failed to open file!" << std::endl;
-	else
-		std::cout << "[+] FILE OPENED SUCCESSFULLY!" << std::endl;
-
-	while(std::getline(is, line))
-	{
-		if(line[0] == 'v' && line[1] == ' ')
-		{
-			std::istringstream ss(line.substr(2));
-			Vertex v;
-			ss >> v.x >> std::ws >> v.y >> std::ws >> v.z;
-			vertices.push_back(v);
-		}
-	}
 	
-	is.close();
-	// -------------------------------------------------------------------------------------------------------------
-
 	// Shaders------------------------------------------------------------------------------------------------------
 	std::ifstream vShaderFile, fShaderFile;
 	vShaderFile.open("assets/shaders/Vshader.glsl");
@@ -103,19 +78,11 @@ int main()
 	}
 	// ----------------------------------------------------------------------------------------------------------------
 
-	// VAO and VBO-----------------------------------------------------------------------------------------------------
-	unsigned int vertexBuffer, vertexArray;
-	glGenVertexArrays(1, &vertexArray);
-	glGenBuffers(1, &vertexBuffer);
-
-	glBindVertexArray(vertexArray);
-
-	glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
-	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(Vertex), &vertices[0], GL_STATIC_DRAW);
-
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)0);
-	glEnableVertexAttribArray(0);
-	// -----------------------------------------------------------------------------------------------------------
+	m_VertexBuffer = IntermediateCG::VertexBuffer::Create("assets/meshes/teapot.obj", m_Vertices);
+	m_VertexArray = IntermediateCG::VertexArray::Create();
+	m_VertexArray->Bind();
+	m_VertexBuffer->Bind();
+	m_VertexArray->AddVertexBuffer(m_VertexBuffer);
 
 	while (m_RendererCommand->GetWindowShouldClose())
 	{
@@ -123,17 +90,12 @@ int main()
 		m_RendererCommand->Clear();
 
 		glUseProgram(program);
-		glDrawArrays(GL_POINTS, 0, vertices.size());
+		glDrawArrays(GL_POINTS, 0, m_Vertices.size());
 
 		m_RendererCommand->SwapBuffer();
 		m_RendererCommand->PollEvents();
 	}
 
-	// Clean up-------------------------------------------------------------------------------------------------------
-	glDeleteVertexArrays(1, &vertexArray);
-	glDeleteBuffers(1, &vertexBuffer);
-	// ---------------------------------------------------------------------------------------------------------------
-	
 	m_RendererCommand->Terminate();
 	delete m_RendererCommand;
 	return 0;

@@ -1,4 +1,9 @@
 #pragma once
+#include <iostream>
+#include <string>
+#include <sstream>
+#include <fstream>
+
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
@@ -26,6 +31,7 @@ namespace IntermediateCG
             virtual bool GetWindowShouldClose() { return false; }
             virtual void Terminate() {}
 
+            // Common
             inline static API GetAPI() { return s_API; }
         private:
             static API s_API;
