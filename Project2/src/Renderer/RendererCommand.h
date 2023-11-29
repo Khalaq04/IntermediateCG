@@ -32,30 +32,32 @@ namespace IntermediateCG
                 return s_RendererAPI->CreateWindow(width, height, title);
             }
 
-            inline void SwapBuffer()
-            {
-                s_RendererAPI->SwapBuffer();
-            }
+            #ifdef API_OPENGL
+                inline void SwapBuffer()
+                {
+                    s_RendererAPI->SwapBuffer();
+                }
 
-            inline void PollEvents()
-            {
-                s_RendererAPI->PollEvents();
-            }
+                inline void PollEvents()
+                {
+                    s_RendererAPI->PollEvents();
+                }
 
-            inline int GladInit()
-            {
-                return s_RendererAPI->GladInit();
-            }
+                inline bool GetWindowShouldClose()
+                {
+                    return s_RendererAPI->GetWindowShouldClose();
+                }
 
-            inline bool GetWindowShouldClose()
-            {
-                return s_RendererAPI->GetWindowShouldClose();
-            }
+                inline void Terminate()
+                {
+                    s_RendererAPI->Terminate();
+                }
 
-            inline void Terminate()
-            {
-                s_RendererAPI->Terminate();
-            }
+                inline GLFWwindow* GetWindow()
+                {
+                    s_RendererAPI->GetWindow();
+                }
+            #endif
 
             static RendererAPI* s_RendererAPI;
     };

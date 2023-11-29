@@ -17,7 +17,6 @@ namespace IntermediateCG
 
             virtual void SwapBuffer() override;
             virtual void PollEvents() override;
-            virtual int GladInit() override;
             virtual bool GetWindowShouldClose() override;
             virtual void Terminate() override;
         private:

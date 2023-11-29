@@ -1,11 +1,5 @@
 #include "Main.h"
 
-class Vertex
-{
-	public:
-		float x, y, z;
-};
-
 int main()
 {
 	if(m_API == IntermediateCG::RendererAPI::API::OpenGL)
@@ -16,8 +10,6 @@ int main()
 	std::string title = "Project 2";
 
 	m_RendererCommand->CreateWindow(1080, 720, title.c_str()); 
-
-	m_RendererCommand->GladInit();
 	
 	// Shaders------------------------------------------------------------------------------------------------------
 	std::ifstream vShaderFile, fShaderFile;

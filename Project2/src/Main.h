@@ -5,8 +5,10 @@
 #include <sstream>
 #include <vector>
 
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
+#ifdef API_OPENGL
+    #include <glad/glad.h>
+    #include <GLFW/glfw3.h>
+#endif
 
 #include "Renderer/RendererAPI.h"
 #include "Renderer/RendererCommand.h"

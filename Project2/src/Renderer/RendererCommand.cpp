@@ -3,5 +3,7 @@
 
 namespace IntermediateCG
 {
-    RendererAPI* RendererCommand::s_RendererAPI = new OpenGLRendererAPI;
+    #ifdef API_OPENGL
+        RendererAPI* RendererCommand::s_RendererAPI = new OpenGLRendererAPI;
+    #endif
 }

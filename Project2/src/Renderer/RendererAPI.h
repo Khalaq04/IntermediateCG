@@ -25,11 +25,12 @@ namespace IntermediateCG
             virtual GLFWwindow* GetWindow() = 0;
 
             // GLFW OpenGL
-            virtual void SwapBuffer() {}
-            virtual void PollEvents() {}
-            virtual int GladInit() { return 0; }
-            virtual bool GetWindowShouldClose() { return false; }
-            virtual void Terminate() {}
+            #ifdef API_OPENGL
+                virtual void SwapBuffer() {}
+                virtual void PollEvents() {}
+                virtual bool GetWindowShouldClose() { return false; }
+                virtual void Terminate() {}
+            #endif
 
             // Common
             inline static API GetAPI() { return s_API; }

@@ -23,6 +23,15 @@ namespace IntermediateCG
 
         m_Window = window;
 
+        #ifdef API_OPENGL
+            if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+	        {
+	        	std::cout << "Failed to Initialize Glad!" << std::endl;
+	        	glfwTerminate();
+	        	return 0;
+	        }
+        #endif
+
         return 1;
     }
 
@@ -49,17 +58,6 @@ namespace IntermediateCG
     void OpenGLRendererAPI::PollEvents()
     {
         glfwPollEvents();
-    }
-
-    int OpenGLRendererAPI::GladInit()
-    {
-        if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-	    {
-	    	std::cout << "Failed to Initialize Glad!" << std::endl;
-	    	glfwTerminate();
-	    	return -1;
-	    }
-        return 0;
     }
 
     bool OpenGLRendererAPI::GetWindowShouldClose()

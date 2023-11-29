@@ -2,5 +2,7 @@
 
 namespace IntermediateCG
 {
-    RendererAPI::API RendererAPI::s_API = RendererAPI::API::OpenGL;
+    #ifdef API_OPENGL
+        RendererAPI::API RendererAPI::s_API = RendererAPI::API::OpenGL;
+    #endif
 }
