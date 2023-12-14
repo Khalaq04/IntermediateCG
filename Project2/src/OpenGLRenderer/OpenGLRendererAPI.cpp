@@ -72,4 +72,9 @@ namespace IntermediateCG
     {
         glfwTerminate();
     }
+
+    void OpenGLRendererAPI::DrawPoints(unsigned int first, unsigned int count)
+    {
+        glDrawArrays(GL_POINTS, first, count);
+    }
 }

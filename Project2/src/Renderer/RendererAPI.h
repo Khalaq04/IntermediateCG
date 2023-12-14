@@ -22,6 +22,7 @@ namespace IntermediateCG
             virtual void SetClearColor(float r, float g, float b, float a) = 0;
             virtual void Clear() = 0;
             virtual int CreateWindow(unsigned int width, unsigned int height, const char* title) = 0;
+            virtual void DrawPoints(unsigned int first, unsigned int count) = 0;
             virtual GLFWwindow* GetWindow() = 0;
 
             // GLFW OpenGL

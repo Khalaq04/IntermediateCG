@@ -32,6 +32,11 @@ namespace IntermediateCG
                 return s_RendererAPI->CreateWindow(width, height, title);
             }
 
+            inline void  DrawPoints(unsigned int first, unsigned int count)
+            {
+                s_RendererAPI->DrawPoints(first, count);
+            }
+
             #ifdef API_OPENGL
                 inline void SwapBuffer()
                 {
@@ -55,7 +60,7 @@ namespace IntermediateCG
 
                 inline GLFWwindow* GetWindow()
                 {
-                    s_RendererAPI->GetWindow();
+                    return s_RendererAPI->GetWindow();
                 }
             #endif
 
