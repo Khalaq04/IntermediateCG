@@ -27,3 +27,6 @@ target_compile_definitions(Project2 PRIVATE GLFW_INCLUDE_NONE)
 add_library(glad vendor/Glad/src/glad.c)
 target_include_directories(glad PRIVATE vendor/Glad/include)
 target_include_directories(Project2 PRIVATE vendor/Glad/include)
+
+add_subdirectory(vendor/glm)
+target_include_directories(Project2 PRIVATE vendor/glm)

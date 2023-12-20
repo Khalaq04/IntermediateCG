@@ -37,32 +37,26 @@ namespace IntermediateCG
                 s_RendererAPI->DrawPoints(first, count);
             }
 
-            #ifdef API_OPENGL
-                inline void SwapBuffer()
-                {
-                    s_RendererAPI->SwapBuffer();
-                }
-
-                inline void PollEvents()
-                {
-                    s_RendererAPI->PollEvents();
-                }
-
-                inline bool GetWindowShouldClose()
-                {
-                    return s_RendererAPI->GetWindowShouldClose();
-                }
-
-                inline void Terminate()
-                {
-                    s_RendererAPI->Terminate();
-                }
-
-                inline GLFWwindow* GetWindow()
-                {
-                    return s_RendererAPI->GetWindow();
-                }
-            #endif
+            inline void SwapBuffer()
+            {
+                s_RendererAPI->SwapBuffer();
+            }
+            inline void PollEvents()
+            {
+                s_RendererAPI->PollEvents();
+            }
+            inline bool GetWindowShouldClose()
+            {
+                return s_RendererAPI->GetWindowShouldClose();
+            }
+            inline void Terminate()
+            {
+                s_RendererAPI->Terminate();
+            }
+            inline GLFWwindow* GetWindow()
+            {
+                return s_RendererAPI->GetWindow();
+            }
 
             static RendererAPI* s_RendererAPI;
     };

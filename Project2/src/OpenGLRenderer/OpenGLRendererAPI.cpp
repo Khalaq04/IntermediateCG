@@ -12,25 +12,22 @@ namespace IntermediateCG
 
     int OpenGLRendererAPI::CreateWindow(unsigned int width, unsigned int height, const char* title)
     {
-        GLFWwindow* window = glfwCreateWindow(width, height, title, NULL, NULL);
-	    if (!window)
+        m_Window = glfwCreateWindow(width, height, title, NULL, NULL);
+	    if (!m_Window)
 	    {
 	    	std::cout << "Failed to create window!" << std::endl;
 	    	glfwTerminate();
 	    	return 0;
 	    }
-	    glfwMakeContextCurrent(window);
+	    glfwMakeContextCurrent(m_Window);
+        glfwSetFramebufferSizeCallback(m_Window, [](GLFWwindow* window, int width, int height){ glViewport(0, 0, width, height); });
 
-        m_Window = window;
-
-        #ifdef API_OPENGL
-            if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-	        {
-	        	std::cout << "Failed to Initialize Glad!" << std::endl;
-	        	glfwTerminate();
-	        	return 0;
-	        }
-        #endif
+        if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+	    {
+	    	std::cout << "Failed to Initialize Glad!" << std::endl;
+	    	glfwTerminate();
+	    	return 0;
+	    }
 
         return 1;
     }

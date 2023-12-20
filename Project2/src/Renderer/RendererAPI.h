@@ -7,6 +7,8 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
+#include "Renderer/Camera.h"
+
 namespace IntermediateCG
 {
     class RendererAPI
@@ -14,7 +16,7 @@ namespace IntermediateCG
         public:
             enum class API
             {
-                None = 0, OpenGL = 1
+                None = 0, OpenGL = 1, Vulkan = 2
             };
 
             virtual void Init() = 0;
@@ -26,12 +28,10 @@ namespace IntermediateCG
             virtual GLFWwindow* GetWindow() = 0;
 
             // GLFW OpenGL
-            #ifdef API_OPENGL
-                virtual void SwapBuffer() {}
-                virtual void PollEvents() {}
-                virtual bool GetWindowShouldClose() { return false; }
-                virtual void Terminate() {}
-            #endif
+            virtual void SwapBuffer() {}
+            virtual void PollEvents() {}
+            virtual bool GetWindowShouldClose() { return false; }
+            virtual void Terminate() {}
 
             // Common
             inline static API GetAPI() { return s_API; }

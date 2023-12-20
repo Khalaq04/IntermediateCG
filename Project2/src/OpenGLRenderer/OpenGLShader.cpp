@@ -65,4 +65,10 @@ namespace IntermediateCG
     {
         glUseProgram(m_ShaderID);
     }
+    
+	void OpenGLShader::SetUniformMat4(const std::string name, const glm::mat4& transform)
+    {
+		uint32_t location = glGetUniformLocation(m_ShaderID, name.c_str());
+		glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(transform));
+    }
 }

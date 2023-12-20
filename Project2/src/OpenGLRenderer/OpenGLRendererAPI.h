@@ -3,6 +3,8 @@
 
 #include "Renderer/RendererAPI.h"
 
+#include "OpenGLRenderer/OpenGLCamera.h"
+
 namespace IntermediateCG
 {
     class OpenGLRendererAPI : public RendererAPI
