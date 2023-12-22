@@ -20,12 +20,15 @@ namespace IntermediateCG
             glm::vec3 m_Right;
 
             bool firstMouse = true;
+            bool isPerspective = true;
 
             float m_Yaw = -89.0f, m_Pitch = 0.0f; 
 
             double lastX = 0.0, lastY = 0.0, m_Zoom = 45.0f;
 
-            glm::mat4 m_PerspectiveTransform;
+            glm::mat4 m_FinalTransform;
             glm::mat4 m_ViewTransform;
+
+            GLFWwindow* m_Window;
     };
 }

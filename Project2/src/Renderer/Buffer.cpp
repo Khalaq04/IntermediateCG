@@ -25,6 +25,8 @@ namespace IntermediateCG
 	    		ss >> v.x >> std::ws >> v.y >> std::ws >> v.z;
 	    		vertices.push_back(v);
 	    	}
+			else if(line[0] == 'v' && line[1] == 'n')
+				break;
 	    }
         
 	    is.close();
