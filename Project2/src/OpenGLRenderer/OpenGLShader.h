@@ -16,7 +16,11 @@ namespace IntermediateCG
             virtual void Use() override;
 
             virtual void SetUniformMat4(const std::string name, const glm::mat4& transform) override;
+            virtual void Update(GLFWwindow* window) override;
         private:
             unsigned int m_ShaderID;
+            std::string m_VertexPath;
+            std::string m_FragmentPath;
+            std::string m_GeometryPath;
     };
 }

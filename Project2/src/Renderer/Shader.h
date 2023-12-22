@@ -13,6 +13,7 @@ namespace IntermediateCG
             virtual void Use() = 0;
 
             virtual void SetUniformMat4(const std::string name, const glm::mat4& transform) = 0;
+            virtual void Update(GLFWwindow* window) = 0;
 
             static Shader* Create(std::string vertexPath, std::string fragmentPath, std::string geometryPath = std::string());
     };

@@ -32,6 +32,8 @@ int main()
 		m_Shader->SetUniformMat4("u_Transform", m_Camera->GetTransform()*model);
 		m_RendererCommand->DrawPoints(0, m_Vertices.size());
 
+		m_Shader->Update(m_RendererCommand->GetWindow());
+
 		m_RendererCommand->SwapBuffer();
 		m_RendererCommand->PollEvents();
 	}
